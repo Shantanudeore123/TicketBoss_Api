@@ -29,6 +29,60 @@ I done it using Postman where I check APi.
 - **UUID** (`uuid` package) – generates unique reservation IDs.
 
 ---
+When we open ticketboss.js and run it that time we get message 🎟️ TicketBoss API running on http://localhost:3000
+if this message gets then we go to postman and give request for post http://localhost:3000/events and put this in body 
+for events
+{
+  "eventId": "node-meetup-2025",
+  "name": "Node.js Meet-up",
+  "totalSeats": 500,
+  "availableSeats": 500,
+  "version": 0
+}
+we get output
+200 ok in green
+{
+    "message": "Event created successfully"
+}
+ for Reservation 
+ post http://localhost:3000/reservation
+ in body 
+ {
+  "partnerId": "abc-corp",
+  "seats": 3
+}
+output
+{
+  "reservationId": "some-uuid",
+  "seats": 3,
+  "status": "confirmed"
+}
+409 Conflict if not enough seats
+
+400 Bad Request if seats ≤ 0 or > 10
+cancel reservation
+POST http://localhost:3000/events/E002/cancel
+in body
+{
+  "seats": 2
+}
+output
+{
+  "message": "Cancelled 2 seat(s) successfully",
+  "remainingSeats": 97
+}
+for update 
+PUT http://localhost:3000/events/E002
+in body
+{
+  "name": "Node.js Meetup (Updated)",
+  "totalSeats": 120
+}
+output
+200 ok 
+{
+    "message": "Event updated successfully"
+}
 
 ## Setup Instructions
 
